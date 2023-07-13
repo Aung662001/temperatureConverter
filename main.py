@@ -2,6 +2,13 @@ import customtkinter
 import customtkinter as ctk
 
 
+def validate_entry(text):
+    if text.isdigit() or text == "":
+        return True
+    else:
+        return False
+
+
 def convert_temperature():
     choice = selected_value.get()
     if choice == "C":
@@ -47,9 +54,10 @@ input_Frame = ctk.CTkFrame(window)
 input_Frame.pack(fill="x", padx=50, pady=(30, 20))
 
 temperature_entry = ctk.CTkEntry(input_Frame, placeholder_text="Enter temperature...")
+temperature_entry.configure(validatecommand=(temperature_entry.register(validate_entry), "%P"))
 temperature_entry.pack(side="left", padx=(80, 10), pady=20)
 
-convert_btn = ctk.CTkButton(input_Frame,text="Convert", command=convert_temperature )
+convert_btn = ctk.CTkButton(input_Frame,text="Convert", command=convert_temperature)
 convert_btn.pack(side="left")
 
 display_Frame = ctk.CTkFrame(window)
